@@ -1,0 +1,160 @@
+\documentclass{scrbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{datetime}
+
+\newdateformat{monthyear}{
+  \monthname[\THEMONTH] \THEYEAR
+}
+
+\theoremstyle{definition}\newtheorem{defn}{Definition}
+\theoremstyle{definition}\newtheorem*{rmk}{Remark}
+
+\newcommand{\Chapter}[1]{\chapter*{#1}\addcontentsline{toc}{chapter}{#1}}
+\newcommand{\hi}[1]{{\color{blue}\textbf{#1}}}
+
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+
+\DeclareMathOperator{\Hom}{Hom}
+
+\author{\textsc{Bhavya Tiwari}\thanks{Roll number \textsc{24B0913}}}
+\title{Category Theory \\[5mm]
+\Large Summer of Science 2025 Project}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\Chapter{Preface}
+
+This report is a collection of things I have learnt and problems that I have
+solved during my Summer of Science 2025 project on \emph{Category Theory} under
+Aryaman Maithani.
+\\[2mm]
+Each chapter begins with a section titled \hi{Terminology Revisited} and ends
+with solutions to selected problems from the references. It is not necessary
+that the terminology section has to be thoroughly understood before proceeding
+to read the chapter; infact it is quite the opposite. If some advanced example
+from \emph{Category Theory in Context} took time for me to process, I add some
+terms in the corresponding chapter so that it is easier to go through next time.
+Anyway we can't keep reading a new book to understand an example in a category
+theory book; the program is called Summer of Science and not Sages of Science.
+\\[2mm]
+More Details to be added later.
+
+\bigskip\noindent
+Bhavya Tiwari, IIT Bombay \\
+\monthyear\today
+
+\chapter{Introduction to Categories}
+\section*{Terminology Revisited}
+
+\begin{description}
+  \item[Normal Subgroup] $G$ is a normal subgroup of $H$, denoted by 
+    \[G \triangleleft H \iff hgh^{-1} \in G\] 
+    for every $g \in G$ and $h
+    \in H$. The map $x \mapsto hxh^{-1}$ is known as a \emph{conjugation}. They
+    are kernels of some homomorphism. Quotient groups can only be defined for
+    normal subgroups.
+
+  \item[Short exact sequences]  A sequence of groups with homomorphisms
+    between them, i.e., 
+
+    \[ \dots \to G_{-1} \to G_{0} \to G_{1} \to G_{2} \to \dots \]
+
+    is said to be \emph{exact} if the image of the map $\psi: G_{k-1} \to G_k$ 
+    is the kernel of the map $\phi: G_k \to G_{k+1}$ for each $k$.
+
+  \item[Group Extension] A group extension of an abelian group $H$ by an abelian
+    group $G$ consists of a group $E$ so that 
+    \[ 0 \to G \to E \to H \to 0 \]
+    is a short exact sequence. Note that this embeds $G$ as a normal subgroup of
+    $E$ such that $H \approx E/G$. The inclusion $\psi: G \hookrightarrow E$ and 
+    surjection $\phi: E \twoheadrightarrow H$ are a part of the group extension.
+
+  \item[Prufer p-group] It is the Sylow $p$-subgroup of $\Q/\Z$, i.e.,
+    $\Z[1/p]/\Z$. This is so because all elements having their order as a prime
+    power of $p$ satisfy,
+    \[p^k \cdot \frac ab \in [0] \implies \frac ab = \frac n{p^k} \text{ for
+    some } n \in \Z.\]
+
+  \item[Homology and Cohomology groups] They are used in algebraic topology.
+
+  \item[Hom-set] The collection of morphisms between a fixed
+    pair of objects in a category, say $X \to Y$, is denoted by $\Hom(X, Y)$.
+    In a locally small category, this is called the Hom-set (even if it may not
+    be a set of homomorphism).
+\end{description}
+
+\newpage
+
+\section{What is a Category?}
+
+\begin{defn}[Category]
+  A \emph{category} consists of mathematical objects and morphisms (aka
+  functions, arrows) between them.
+   Arrows have a direction and point from domain to the codomain. For
+  every object there is an identity arrow from the object to itself. Arrows are
+  composable with each other, with the caveat that the ``resultant'' arrow is
+  already present in the category; composition does not create ``new''
+  arrows. Composing a morphism with the identity morphism on either its
+  domain or codomain yields the same morphism. Note, however, that you must
+  left-compose the identity morphism on the codomain and right-compose the one
+  on the domain. As usual, composition should be associative.
+\end{defn}
+
+What differentiates category theory from set theory is the
+\href{https://ncatlab.org/nlab/show/category+theory}{focus} of category theory
+on relations between objects (considered in tandem with the objects
+themselves\footnote{As said in \cite{riehl2017category} pp. 3}) rather than
+trying to come up with a description of objects in terms of ``more atomic''
+objects.
+
+\begin{rmk}[Non-Trivial or Trivial?]
+  \label{s1}
+  Unlike most other mathematical objects we encounter, a category with one
+  object need not be as trivial as those mundane siblings. For example, consider
+  $\Z$ with functions $\Z \to \Z$ being the morphsims. An infinite number of
+  morphisms are possible even if there is only one object!
+\end{rmk}
+
+An \emph{endomorphism} is an arrow from an object to itself. By
+\nameref{s1}, you know that endomorphisms on even one object can be quite
+elabborate. However not all endomorphisms are born equal. An endomorphism that
+is also an isomorphism is called an \emph{automorphism}.
+
+\begin{defn}[Groupoid]
+  A category where every morphism is an isomorphism is called a groupoid.
+  For example, a groupoid with one object is precisely a group (also, every
+  element of a group $g \in G$ is associated with a canonical isomorphism
+  $x \mapsto gx$; in a particular category though, you may wish to declare a
+  subset of these possible isomorphisms as arrows -- there you have a
+  \emph{quotient group}).
+\end{defn}
+
+\begin{defn}[Concrete and Abstract]
+
+\end{defn}
+
+\begin{defn}[Smallness]
+  A category is said to be \emph{locally small} if the collection of morphisms
+  between any given pair of objects, forms a set. The category is \emph{small}
+  if the collection of all arrows inside it forms a set.
+\end{defn}
+
+\newpage
+
+\section{Solutions to Selected Problems}
+\subsection{Category Theory in Context}
+\subsection{Tom Leinster}
+
+\bibliographystyle{alpha}
+\bibliography{references.bib}
+ 
+\end{document}
