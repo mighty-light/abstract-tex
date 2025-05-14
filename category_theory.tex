@@ -22,6 +22,7 @@
 \newcommand{\R}{\mathbf{R}}
 
 \DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Id}{Id}
 
 \author{\textsc{Bhavya Tiwari}\thanks{Roll number \textsc{24B0913}}}
 \title{Category Theory \\[5mm]
@@ -37,14 +38,12 @@ This report is a collection of things I have learnt and problems that I have
 solved during my Summer of Science 2025 project on \emph{Category Theory} under
 Aryaman Maithani.
 \\[2mm]
-Each chapter begins with a section titled \hi{Terminology Revisited} and ends
-with solutions to selected problems from the references. It is not necessary
-that the terminology section has to be thoroughly understood before proceeding
-to read the chapter; infact it is quite the opposite. If some advanced example
-from \emph{Category Theory in Context} took time for me to process, I add some
-terms in the corresponding chapter so that it is easier to go through next time.
-Anyway we can't keep reading a new book to understand an example in a category
-theory book; the program is called Summer of Science and not Sages of Science.
+If some advanced example from \emph{Category Theory in Context} took some time
+to process, I add a corresponding chapter in the ``Crash Courses'' part so that
+it is easier to understand. Nevertheless, it is supposed to be quite concise
+(and therefore may prove to be insufficient). In my defence,
+we can't keep reading a new book to understand an example in a category theory
+book; the program is called Summer of Science and not Sages of Science.
 \\[2mm]
 More Details to be added later.
 
@@ -52,8 +51,102 @@ More Details to be added later.
 Bhavya Tiwari, IIT Bombay \\
 \monthyear\today
 
+\part{Introduction to Category Theory}
+
 \chapter{Introduction to Categories}
-\section*{Terminology Revisited}
+
+\section{What is a Category?}
+
+\begin{defn}[Category]
+  A \emph{category} consists of mathematical objects and morphisms (aka
+  functions, arrows) between them.  Arrows have a direction and point from
+  domain to codomain\footnote{This terminology may be a misnomer. See
+    \nameref{concreteandabstract}. Also note that specifying only the domain and
+  codomain does not necessarily specify the arrow.}. For every object $\mathfrak
+  o$ there is an identity arrow $\Id: \mathfrak o \to \mathfrak o$. Arrows are
+  composable with each other associatively, with the caveat that the ``resultant'' arrow is
+  already present in the category; composition does not create ``new'' arrows. 
+  \[ f\Id_{\mathfrak o} = \Id_{\mathfrak o'}f = f \text{ for all objects
+  }\mathfrak o, \mathfrak o' \text{ and }f : \mathfrak o \to \mathfrak o'\]
+\end{defn}
+
+What differentiates category theory from set theory is the
+\href{https://ncatlab.org/nlab/show/category+theory}{focus} of category theory
+on relations between objects\footnote{\cite{riehl2017category} pp. 3 asks to
+consider the object ``in tandem''. However, I feel it is more of an obligation
+to consider the object, as they appear only to define what morphisms are (cf.
+\href{https://ncatlab.org/nlab/show/category+theory}{nLab}). For instance, just
+look at the number of axioms morphisms are supposed to satisfy.} rather than
+trying to describe ``more complex'' objects in terms of ``more atomic'' objects.
+
+\begin{rmk}[Non-Trivial or Trivial?]
+  \label{s1}
+  Unlike most other mathematical objects we encounter, a category with one
+  object need not be as trivial as its mundane siblings. For example, consider
+  $\Z$ with functions $\Z \to \Z$ being the morphsims. An infinite number of
+  morphisms are possible even if there is only one object!
+\end{rmk}
+
+An \hi{endomorphism} is an arrow from an object to itself. By the last remark,
+you know that endomorphisms on even one object can be quite
+elaborate. However not all endomorphisms are born equal.
+
+\begin{defn}[Isomorphism]
+  We can now describe a purely category theoretic definition of an isomorphism.
+  An arrow $f: \mathfrak o \to \mathfrak o'$ is an \emph{isomorphism} if there
+  exists an arrow $g: \mathfrak o' \to \mathfrak o$ satisfying the relations,
+  \begin{align*}
+    fg &= \Id_{\mathfrak o'} \\
+    gf &= \Id_{\mathfrak o}.
+  \end{align*}
+  If an isomorphism exists between $\mathfrak o$ and $\mathfrak o'$, then
+  they are \emph{isomorphic}, i.e., $\mathfrak o \cong \mathfrak o'$.
+\end{defn}
+
+An endomorphism that is also an \emph{isomorphism} is called an \hi{automorphism}.
+
+\begin{defn}[Groupoid]
+  A category where every morphism is an isomorphism is called a groupoid.
+  For example, a groupoid with one object is precisely a group (also, every
+  element of a group $g \in G$ is associated with a canonical isomorphism
+  $x \mapsto gx$; in a particular category though, you may wish to declare a
+  subset of these possible isomorphisms as arrows -- there you have a
+  \emph{quotient group}).
+\end{defn}
+\begin{defn}[Concrete and Abstract]
+  \label{concreteandabstract}
+  Time for a surprise! A category where all arrows are functions on the domain
+  (as a set of values) and take values in codomain (as a set of values) is known
+  as \emph{concrete}. The category is said to be \emph{abstract} otherwise.
+\end{defn}
+
+\begin{defn}[Smallness]
+  A category is said to be \emph{locally small} if the collection of morphisms
+  between any given pair of objects, forms a set. The category is \emph{small}
+  if the collection of all arrows inside it forms a set.
+\end{defn}
+
+\begin{defn}[Hom-set]
+  The collection of morphisms between a fixed
+  pair of objects in a category, say $X \to Y$, is denoted by $\Hom(X, Y)$.
+  In a locally small category, this is called the Hom-set (even if it may not
+  be a set of homomorphism).
+\end{defn}
+
+\section{Functors}
+%% Prove that C(c, -) is a functor
+%% f: x \to y ==> f_*: \Hom(c, x) \to \Hom(c, y)
+
+\newpage
+
+\part{Problems and Solutions}
+\setcounter{chapter}{0}
+TO BE ADDED FROM ANOTHER FILE DEDICATED TO PROBLEMS AND THEIR SOLUTIONS.
+
+\part{Crash Courses}
+\setcounter{chapter}{0}
+
+\chapter{Group Theory}
 
 \begin{description}
   \item[Normal Subgroup] $G$ is a normal subgroup of $H$, denoted by 
@@ -84,75 +177,9 @@ Bhavya Tiwari, IIT Bombay \\
     \[p^k \cdot \frac ab \in [0] \implies \frac ab = \frac n{p^k} \text{ for
     some } n \in \Z.\]
 
-  \item[Homology and Cohomology groups] They are used in algebraic topology.
-
-  \item[Hom-set] The collection of morphisms between a fixed
-    pair of objects in a category, say $X \to Y$, is denoted by $\Hom(X, Y)$.
-    In a locally small category, this is called the Hom-set (even if it may not
-    be a set of homomorphism).
 \end{description}
 
-\newpage
 
-\section{What is a Category?}
-
-\begin{defn}[Category]
-  A \emph{category} consists of mathematical objects and morphisms (aka
-  functions, arrows) between them.
-   Arrows have a direction and point from domain to the codomain. For
-  every object there is an identity arrow from the object to itself. Arrows are
-  composable with each other, with the caveat that the ``resultant'' arrow is
-  already present in the category; composition does not create ``new''
-  arrows. Composing a morphism with the identity morphism on either its
-  domain or codomain yields the same morphism. Note, however, that you must
-  left-compose the identity morphism on the codomain and right-compose the one
-  on the domain. As usual, composition should be associative.
-\end{defn}
-
-What differentiates category theory from set theory is the
-\href{https://ncatlab.org/nlab/show/category+theory}{focus} of category theory
-on relations between objects (considered in tandem with the objects
-themselves\footnote{As said in \cite{riehl2017category} pp. 3}) rather than
-trying to come up with a description of objects in terms of ``more atomic''
-objects.
-
-\begin{rmk}[Non-Trivial or Trivial?]
-  \label{s1}
-  Unlike most other mathematical objects we encounter, a category with one
-  object need not be as trivial as those mundane siblings. For example, consider
-  $\Z$ with functions $\Z \to \Z$ being the morphsims. An infinite number of
-  morphisms are possible even if there is only one object!
-\end{rmk}
-
-An \emph{endomorphism} is an arrow from an object to itself. By
-\nameref{s1}, you know that endomorphisms on even one object can be quite
-elabborate. However not all endomorphisms are born equal. An endomorphism that
-is also an isomorphism is called an \emph{automorphism}.
-
-\begin{defn}[Groupoid]
-  A category where every morphism is an isomorphism is called a groupoid.
-  For example, a groupoid with one object is precisely a group (also, every
-  element of a group $g \in G$ is associated with a canonical isomorphism
-  $x \mapsto gx$; in a particular category though, you may wish to declare a
-  subset of these possible isomorphisms as arrows -- there you have a
-  \emph{quotient group}).
-\end{defn}
-
-\begin{defn}[Concrete and Abstract]
-
-\end{defn}
-
-\begin{defn}[Smallness]
-  A category is said to be \emph{locally small} if the collection of morphisms
-  between any given pair of objects, forms a set. The category is \emph{small}
-  if the collection of all arrows inside it forms a set.
-\end{defn}
-
-\newpage
-
-\section{Solutions to Selected Problems}
-\subsection{Category Theory in Context}
-\subsection{Tom Leinster}
 
 \bibliographystyle{alpha}
 \bibliography{references.bib}

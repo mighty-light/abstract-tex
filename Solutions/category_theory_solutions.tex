@@ -1,0 +1,85 @@
+\documentclass{scrbook}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{enumitem}
+
+\newcommand{\hi}[1]{{\color{blue}\textbf{#1}}}
+
+\newcommand{\Z}{\mathbf{Z}}
+\newcommand{\Q}{\mathbf{Q}}
+\newcommand{\R}{\mathbf{R}}
+
+\DeclareMathOperator{\Hom}{Hom}
+
+\setlength{\parindent}{0pt}
+
+\author{\textsc{Bhavya Tiwari}\thanks{Roll number \textsc{24B0913}}}
+\title{Category Theory \\[5mm]
+\Large Summer of Science 2025 Project}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\part{Category Theory in Context}
+\chapter{Categories, Functors, Natural Transformations}
+\section{Abstract and concrete categories}
+
+\hi{1.1.i}
+\begin{proof}
+  Observe that $gfh : y \to x$. Also $gfh = (gf)h = h$ and
+  $gfh = g(fh) = g$, thus $g = h$. This means that $f$ has an
+  inverse morphism $g$ such that $fg = 1_x$ and $gf = 1_y$, so
+  $f$ must be an isomorphism.
+\end{proof}
+
+\hi{1.1.ii}
+\begin{proof}
+  First we show that the collection of isomorphisms in
+  $\mathcal{C}$ with the objects of $\mathcal{C}$ forms a
+  category. The identity morphism exists in the new category
+  since it is its own inverse and therefore an isomorphism.
+  Associativity is inherited from morphisms on
+  $\mathcal C$. To prove composability, say $f: x \to y$ and
+  $g: y \to z$ are isomorphisms, i.e., there exist $f_*$ and
+  $g_*$ such that $ff_* = 1_y$, $f_*f = 1_x$ and $gg_* = 1_z$,
+  $g_*g = 1_y$.  Clearly $gf$ is a morphism since so are $f$
+  and $g$. We claim that $f_*g_*$ is its inverse morphism,
+  which is trivial to verify. Hence $gf$ is an isomorphism.
+  It is clear that the resultant category is a groupoid so let
+  us prove its maximality. Suppose to the contrary that there
+  is a larger groupoid $\mathcal C'$ containing it. Since they have the same
+  objects, $\mathcal C'$ must contain an isomorphism not in
+  $\mathcal C$. This is a contradiction because $\mathcal C$
+  contains all the isomorphisms between its objects.
+  \end{proof}
+
+\hi{1.1.iii}
+\begin{proof}
+Associativity follows in either case because the maps in
+$\mathcal C$ are associative.
+  \begin{enumerate}[label=(\roman*)]
+    \item First note that there is an identity morphism for
+      every $f: c \to x$ because we can take $g = f$. To
+      show composability, let $h_1: a \to b$ be from $f: c \to a$ to
+      $g: c \to b$ and $h_2: b \to d$ be from $g: c \to b$ to $h: c
+      \to d$. Note that $g = h_1f$ and $h = h_2 g$ implies
+      $h = h_2(h_1f) = (h_2h_1)f$ and so the diagram with
+      $h_2h_1$ also commutes.
+
+    \item Identity morphism for $f$ is found by taking $g =
+      f$. To show composability, proceed as before $f = gh_1
+      = (hh_2)h_1 = h(h_2h_1)$.
+  \end{enumerate}  
+\end{proof}
+
+\section{Duality}
+
+\part{Tom Leinster}
+
+\end{document}
